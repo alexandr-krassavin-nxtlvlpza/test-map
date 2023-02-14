@@ -7,7 +7,7 @@ import {getAllShops, setSelectedShop} from "./slices/shop";
 import {toggleDrawer} from "./slices/drawer";
 
 const config = {
-    apiKey: 'AAPKfa4cb3f0d1a9401ca159459b11ef9387zHMZMh-WEbNemmZZIMBONxYiOvGVh-wkL83ZDOQc1XmwU0U4hElTWbc5DHRbNrX5',
+    apiKey: process.env.REACT_APP_API_KEY!,
     basemap: 'arcgis-streets',
     center: [71.3364446, 51.1425071],
     zoom: 10,
