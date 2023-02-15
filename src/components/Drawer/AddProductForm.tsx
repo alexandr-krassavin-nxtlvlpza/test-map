@@ -1,29 +1,30 @@
-import { Box, Button, Stack, TextField, Typography } from "@mui/material";
-import { useFormik } from "formik"
-import * as Yup from "yup";
-import {useDispatch, useSelector} from "../../store";
-import {getSelectedShop} from "../../slices/shop";
-import {addToWishList} from "../../slices/wishList";
-import { v4 as uuid } from "uuid";
+import { Box, Button, Stack, TextField, Typography } from '@mui/material'
+import { useFormik } from 'formik'
+import * as Yup from 'yup'
+import { useDispatch, useSelector } from '../../store'
+import { getSelectedShop } from '../../slices/shop'
+import { addToWishList } from '../../slices/wishList'
+import { v4 as uuid } from 'uuid'
+import { type FC } from 'react'
 
-export const AddProductForm = () => {
-    const dispatch = useDispatch();
-    const selectedShop = useSelector(getSelectedShop);
-    const { submitForm, values, handleBlur, handleChange, errors } = useFormik({
-        validateOnChange: false,
-        validateOnBlur: false,
-        initialValues: {
-            title: "",
-        },
-        validationSchema: Yup.object().shape({
-            title: Yup.string().required(),
-        }),
-        onSubmit: ({ title }, { resetForm }) => {
-            dispatch(addToWishList({ id: uuid(), title, shopID: selectedShop?.id! }));
-            resetForm();
-        },
-    });
-    return (
+export const AddProductForm: FC = () => {
+  const dispatch = useDispatch()
+  const selectedShop = useSelector(getSelectedShop)
+  const { submitForm, values, handleBlur, handleChange, errors } = useFormik({
+    validateOnChange: false,
+    validateOnBlur: false,
+    initialValues: {
+      title: ''
+    },
+    validationSchema: Yup.object().shape({
+      title: Yup.string().required()
+    }),
+    onSubmit: ({ title }, { resetForm }) => {
+      dispatch(addToWishList({ id: uuid(), title, shopID: selectedShop?.id! }))
+      resetForm()
+    }
+  })
+  return (
         <Box>
             <Typography
                 variant="h6"
@@ -48,5 +49,5 @@ export const AddProductForm = () => {
                 <Button onClick={submitForm} variant="contained">Save</Button>
             </Stack>
         </Box>
-    )
+  )
 }

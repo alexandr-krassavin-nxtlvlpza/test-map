@@ -1,20 +1,20 @@
-import {IconButton, List, ListItem, ListItemSecondaryAction, ListItemText} from "@mui/material";
-import DeleteIcon from "@mui/icons-material/Delete";
-import {useCallback} from "react";
-import {removeFromWishList, selectAllProductsOfShop} from "../../slices/wishList";
-import {RootState, useDispatch, useSelector} from "../../store";
-import {getSelectedShop} from "../../slices/shop";
+import { IconButton, List, ListItem, ListItemSecondaryAction, ListItemText } from '@mui/material'
+import DeleteIcon from '@mui/icons-material/Delete'
+import { useCallback, type FC } from 'react'
+import { removeFromWishList, selectAllProductsOfShop } from '../../slices/wishList'
+import { type RootState, useDispatch, useSelector } from '../../store'
+import { getSelectedShop } from '../../slices/shop'
 
-export const WishList = () => {
-    const dispatch = useDispatch();
-    const selectedShop = useSelector(getSelectedShop);
-    const wishList = useSelector((state: RootState) => selectAllProductsOfShop(state, selectedShop?.id!));
-    const handleRemoveFromWishList = useCallback((id: string) => {
-        dispatch(removeFromWishList(id));
-    }, [dispatch]);
-    return (
+export const WishList: FC = () => {
+  const dispatch = useDispatch()
+  const selectedShop = useSelector(getSelectedShop)
+  const wishList = useSelector((state: RootState) => selectAllProductsOfShop(state, selectedShop?.id!))
+  const handleRemoveFromWishList = useCallback((id: string) => {
+    dispatch(removeFromWishList(id))
+  }, [dispatch])
+  return (
         <List>
-            {wishList.map(({ title, id}) => (
+            {wishList.map(({ title, id }) => (
                 <ListItem key={id}>
                     <ListItemText primary={title} />
                     <ListItemSecondaryAction>
@@ -25,5 +25,5 @@ export const WishList = () => {
                 </ListItem>
             ))}
         </List>
-    )
+  )
 }
